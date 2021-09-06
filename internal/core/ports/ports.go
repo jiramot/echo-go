@@ -1,7 +1,7 @@
 package ports
 
 import (
-    domain "jiramot/echo-go/internal/core/domain"
+    "jiramot/echo-go/internal/core/domain"
 )
 
 type EchoRepository interface {

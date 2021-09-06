@@ -1,7 +1,7 @@
 package handler
 
 import (
-    ports "jiramot/echo-go/internal/core/ports"
+    "jiramot/echo-go/internal/core/ports"
     "net/http"
     "github.com/labstack/echo/v4"
 )
@@ -17,11 +17,12 @@ func NewHttpHandler(echoService ports.EchoService) *HttpHandler {
 }
 
 func (hdl *HttpHandler) Echo(ctx echo.Context) error  {
-//     domain, err := hdl.echoService.Echo("Hello")
+    msg := ctx.QueryParam("message")
+    domain, err := hdl.echoService.Echo(msg)
 
-//     if err != nil {
-//         return ctx.String(http.StatusOK, "Not OK")
-//     }
+    if err != nil {
+        return ctx.String(http.StatusOK, "Not OK")
+    }
 
-    return ctx.String(http.StatusOK, "Hello 1")
+    return ctx.String(http.StatusOK, domain.Message)
 }
