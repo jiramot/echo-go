@@ -24,5 +24,5 @@ func (hdl *EchoHttpHandler) Echo(ctx echo.Context) error  {
         return ctx.String(http.StatusOK, "Not OK")
     }
 
-    return ctx.String(http.StatusOK, domain.Message)
+    return ctx.JSON(http.StatusOK, domain)
 }
