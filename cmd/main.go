@@ -11,7 +11,7 @@ import (
 func main() {
     echoRepository := repository.NewEchoRepository()
     echoService := service.New(echoRepository)
-    echoHandler := handler.NewHttpHandler(echoService)
+    echoHandler := handler.NewEchoHttpHandler(echoService)
 
     e := echo.New()
     e.Use(middleware.Logger())

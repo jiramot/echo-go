@@ -6,17 +6,17 @@ import (
     "github.com/labstack/echo/v4"
 )
 
-type HttpHandler struct {
+type EchoHttpHandler struct {
     echoService ports.EchoService
 }
 
-func NewHttpHandler(echoService ports.EchoService) *HttpHandler {
-    return &HttpHandler{
+func NewEchoHttpHandler(echoService ports.EchoService) *EchoHttpHandler {
+    return &EchoHttpHandler{
         echoService: echoService,
     }
 }
 
-func (hdl *HttpHandler) Echo(ctx echo.Context) error  {
+func (hdl *EchoHttpHandler) Echo(ctx echo.Context) error  {
     msg := ctx.QueryParam("message")
     domain, err := hdl.echoService.Echo(msg)
 
