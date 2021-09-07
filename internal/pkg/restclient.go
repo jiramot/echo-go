@@ -21,6 +21,5 @@ func Get(url string) (*http.Response, error) {
     if err != nil {
         return nil, err
     }
-    client := &http.Client{}
-    return client.Do(request)
+    return Client.Do(request)
 }
