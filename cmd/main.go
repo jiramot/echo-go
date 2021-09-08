@@ -10,11 +10,11 @@ import (
 
 func main() {
     echoRepository := repository.NewEchoRepository()
-    echoService := service.New(echoRepository)
+    echoService := service.NewEchoService(echoRepository)
     echoHandler := handler.NewEchoHttpHandler(echoService)
 
     e := echo.New()
     e.Use(middleware.Logger())
-    e.GET("/", echoHandler.Echo)
+    e.GET("/", echoHandler.GetEchoMessage)
     e.Logger.Fatal(e.Start(":8080"))
 }

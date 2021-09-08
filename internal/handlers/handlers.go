@@ -1,24 +1,24 @@
 package handler
 
 import (
+    "github.com/labstack/echo/v4"
     "jiramot/echo-go/internal/core/ports"
     "net/http"
-    "github.com/labstack/echo/v4"
 )
 
 type EchoHttpHandler struct {
-    echoService ports.EchoService
+    echoUseCase ports.EchoUseCase
 }
 
-func NewEchoHttpHandler(echoService ports.EchoService) *EchoHttpHandler {
+func NewEchoHttpHandler(echoUseCase ports.EchoUseCase) *EchoHttpHandler {
     return &EchoHttpHandler{
-        echoService: echoService,
+        echoUseCase: echoUseCase,
     }
 }
 
-func (hdl *EchoHttpHandler) Echo(ctx echo.Context) error  {
+func (hdl *EchoHttpHandler) GetEchoMessage(ctx echo.Context) error  {
     msg := ctx.QueryParam("message")
-    domain, err := hdl.echoService.Echo(msg)
+    domain, err := hdl.echoUseCase.GetEchoMessage(msg)
 
     if err != nil {
         return ctx.String(http.StatusOK, "Not OK")

@@ -1,12 +1,12 @@
 package repository
 
 import (
-    "github.com/matiasvarela/errors"
     "encoding/json"
+    "github.com/matiasvarela/errors"
     "io/ioutil"
-    "jiramot/echo-go/pkg/apperrors"
-    "jiramot/echo-go/internal/pkg"
     "jiramot/echo-go/internal/core/domain"
+    "jiramot/echo-go/internal/pkg"
+    "jiramot/echo-go/pkg/apperrors"
 )
 
 type repository struct {
@@ -17,7 +17,7 @@ func NewEchoRepository() *repository {
     return &repository{}
 }
 
-func (repo *repository) Echo(message string) (domain.Echo, error){
+func (repo *repository) EchoMessage(message string) (domain.Echo, error){
     response, err := restclient.Get("https://postman-echo.com/get?message=" + message)
     if err != nil {
         return domain.Echo{}, errors.New(apperrors.Internal, err, "message", "cause message")
