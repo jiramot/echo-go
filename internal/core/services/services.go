@@ -8,17 +8,17 @@ import (
 )
 
 type service struct {
-    echoRepository ports.EchoPort
+    echoPort ports.EchoPort
 }
 
-func NewEchoService(echoRepository ports.EchoPort) *service {
+func NewEchoService(echoPort ports.EchoPort) *service {
     return &service{
-        echoRepository: echoRepository,
+        echoPort: echoPort,
     }
 }
 
 func (svr *service) GetEchoMessage(message string) (domain.Echo, error) {
-    echo, err := svr.echoRepository.EchoMessage(message)
+    echo, err := svr.echoPort.EchoMessage(message)
     if err != nil {
         return domain.Echo{}, errors.New(apperrors.Internal, err, "message", "cause message")
     }
