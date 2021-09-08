@@ -2,6 +2,7 @@ package repository
 
 import (
     "encoding/json"
+    "fmt"
     "github.com/matiasvarela/errors"
     "io/ioutil"
     "jiramot/echo-go/internal/core/domain"
@@ -9,33 +10,36 @@ import (
     "jiramot/echo-go/pkg/apperrors"
 )
 
-type repository struct {
-
+type echoRepository struct {
 }
 
-func NewEchoRepository() *repository {
-    return &repository{}
+func NewEchoRepository() *echoRepository {
+    return &echoRepository{}
 }
 
-func (repo *repository) EchoMessage(message string) (domain.Echo, error){
-    response, err := restclient.Get("https://postman-echo.com/get?message=" + message)
+func (repo *echoRepository) EchoMessage(message string) (domain.Echo, error) {
+    url := fmt.Sprintf("https://postman-echo.com/get?message=%s", message)
+    response, err := restclient.Get(url)
     if err != nil {
-        return domain.Echo{}, errors.New(apperrors.Internal, err, "message", "cause message")
+        return domain.Echo{}, errors.New(apperrors.Internal, err, "Error", "Endpoint error")
     }
     bytes, err := ioutil.ReadAll(response.Body)
+    if err != nil {
+        return domain.Echo{}, errors.New(apperrors.Internal, err, "Error", "Read stream error")
+    }
     defer response.Body.Close()
-    var result EchoResponse
+    var result PostmanEchoResponse
     if err := json.Unmarshal(bytes, &result); err != nil {
-        return domain.Echo{}, errors.New(apperrors.Internal, err, "message", "cause message")
+        return domain.Echo{}, errors.New(apperrors.Internal, err, "message", "Parse json error")
     }
     return domain.Echo{
         Message: result.Args.Message,
     }, nil
 }
 
-type EchoResponse struct {
-    Args    Args    `json:"args"`
+type PostmanEchoResponse struct {
+    Args Args `json:"args"`
 }
 type Args struct {
-    Message string  `json:"message"`
+    Message string `json:"message"`
 }

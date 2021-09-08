@@ -16,7 +16,7 @@ func NewEchoHttpHandler(echoUseCase ports.EchoUseCase) *EchoHttpHandler {
     }
 }
 
-func (hdl *EchoHttpHandler) GetEchoMessage(ctx echo.Context) error  {
+func (hdl *EchoHttpHandler) GetEchoMessage(ctx echo.Context) error {
     msg := ctx.QueryParam("message")
     domain, err := hdl.echoUseCase.GetEchoMessage(msg)
 

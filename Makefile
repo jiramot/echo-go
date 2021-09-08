@@ -8,5 +8,8 @@ build:
 
 test:	
 	go test -short  ./...
+
+lint:
+	golangci-lint run --fix --fast ./...
 	
 .PHONY: run

@@ -7,17 +7,18 @@ import (
     "jiramot/echo-go/pkg/apperrors"
 )
 
-type service struct {
+type echoService struct {
     echoPort ports.EchoPort
 }
 
-func NewEchoService(echoPort ports.EchoPort) *service {
-    return &service{
+func NewEchoService(echoPort ports.EchoPort) *echoService {
+    return &echoService{
         echoPort: echoPort,
     }
 }
 
-func (svr *service) GetEchoMessage(message string) (domain.Echo, error) {
+// implement EchoUseCase
+func (svr *echoService) GetEchoMessage(message string) (domain.Echo, error) {
     echo, err := svr.echoPort.EchoMessage(message)
     if err != nil {
         return domain.Echo{}, errors.New(apperrors.Internal, err, "message", "cause message")

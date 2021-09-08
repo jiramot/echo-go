@@ -1,11 +1,11 @@
 package main
 
 import (
-	"github.com/labstack/echo/v4"
-	"github.com/labstack/echo/v4/middleware"
-	"jiramot/echo-go/internal/core/services"
-	"jiramot/echo-go/internal/handlers"
-	"jiramot/echo-go/internal/repositories"
+    "github.com/labstack/echo/v4"
+    "github.com/labstack/echo/v4/middleware"
+    "jiramot/echo-go/internal/core/services"
+    "jiramot/echo-go/internal/handlers"
+    "jiramot/echo-go/internal/repositories"
 )
 
 func main() {

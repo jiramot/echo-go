@@ -1,7 +1,7 @@
 package restclient
 
 import (
-	"net/http"
+    "net/http"
 )
 
 type HTTPClient interface {
@@ -9,11 +9,11 @@ type HTTPClient interface {
 }
 
 var (
-	Client HTTPClient
+    Client HTTPClient
 )
 
 func init() {
-	Client = &http.Client{}
+    Client = &http.Client{}
 }
 
 func Get(url string) (*http.Response, error) {
